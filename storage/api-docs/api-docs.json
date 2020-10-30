@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Shop API",
+        "description": "Description of API for the shop module (order form, checkout, client account)",
+        "contact": {
+            "email": "starinasergey@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/create-user": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Log in",
+                "description": "Log in to client account to manage orders.",
+                "operationId": "/api/create-user",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Test"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ruslanpanasovskyi@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ilikelaravel"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Log in",
+                "description": "Log in to client account to manage orders.",
+                "operationId": "/api/login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ruslanpanasovskyi@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ilikelaravel"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Authentication endpoints (login, register, reset password, etc.)"
+        },
+        {
+            "name": "ConfigData",
+            "description": "Site data needed for the frontend (project types, prices, subjects, etc.)"
+        },
+        {
+            "name": "Orders",
+            "description": "Orders"
+        },
+        {
+            "name": "OrderMessages",
+            "description": "Order messages"
+        },
+        {
+            "name": "Tickets",
+            "description": "Support tickets"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
