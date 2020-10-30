@@ -95,42 +95,45 @@ class Login extends Controller
                 'status' => 500
             ], 500);
         }
-        $http2 = new GuzzleHttp\Client;
-        $state = Str::random(40);
-        $query = http_build_query([
-            'client_id' => $oauthClient->id,
-            'redirect_uri' => 'http://127.0.0.1:8001/login',
-            'response_type' => 'code',
-            'scope' => '',
-            'state' => $state,
-        ]);
 
-        $response = $http2->get("http://127.0.0.1:8001/oauth/authorize?". $query);
-var_dump($response);die;
+//        $http2 = new GuzzleHttp\Client;
+//        $state = Str::random(40);
+//        $query = http_build_query([
+//            'client_id' => $oauthClient->id,
+//            'redirect_uri' => 'http://127.0.0.1:8001/api/login',
+//            'response_type' => 'code',
+//            'scope' => '',
+//            'state' => $state,
+//        ]);
+//        $response = $http2->get("http://127.0.0.1:8001/oauth/authorize?". $query);
+//        var_dump($response);die;
 
+
+        //var_dump($data);die;
+
+        //$http = new GuzzleHttp\Client;
+//        $response = $http->post(secure_url('/') . '/oauth/token', [
+//            'form_params' => [
+//                //'grant_type' => 'authorization_code',
+//                //'client_id' => $oauthClient->id,
+//                //'client_secret' => $oauthClient->secret,
+//                //'redirect_uri' => "http://127.0.0.1:8001/login",
+//                //'code' => $request->code,
+//            ],
+//        ]);
+//        var_dump($response);die;
         $data = [
             'grant_type' => 'authorization_code',
-            'redirect_uri' => $oauthClient->redirect,
-            'code' => $request->code,
+            //'redirect_uri' => 'http://127.0.0.1:8001/api/login',
+            //'code' => $request->code,
             'client_id' => $oauthClient->id,
             'client_secret' => $oauthClient->secret,
             'username' => $client->email,
             'password' => $client->password,
         ];
-        $http = new GuzzleHttp\Client;
-var_dump($request->code);die;
-        $response = $http->post(secure_url('/') . '/oauth/token', [
-            'form_params' => [
-                'grant_type' => 'authorization_code',
-                'client_id' => $oauthClient->id,
-                'client_secret' => $oauthClient->secret,
-                'redirect_uri' => "http://127.0.0.1:8001/login",
-                'code' => $request->code,
-            ],
-        ]);
-        //$request = Request::create(secure_url('/') . '/oauth/authorize', 'POST', $data);
+        $request = Request::create(secure_url('/') . '/oauth/token', 'POST', $data);
 
-        //$response = app()->handle($request);
+        $response = app()->handle($request);
         var_dump($response);die;
 
     }
